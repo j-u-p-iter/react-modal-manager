@@ -1,0 +1,25 @@
+language: node_js
+notifications:
+  email: false
+branches:
+  only:
+    - master
+node_js:
+  - '10'
+cache:
+  npm: true
+  directories:
+    - ~/.cache
+jobs:
+  include:
+    - stage: validate
+      script: jupiter-scripts lint
+    - state: test
+      script: yarn run ci
+    - stage: deploy
+      script: yarn run build
+      after_success: jupiter-scripts deploy
+stages:
+  validate
+  test
+  deploy

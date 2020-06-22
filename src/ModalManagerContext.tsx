@@ -1,17 +1,21 @@
-import { createContext, FC } from 'react';
+import { createContext, FC } from "react";
 
-type ModalManagerFactory = (name: string) => {
-  api: { toggleModal: (show: boolean) => void; }
+type ModalManagerFactory = (
+  name: string
+) => {
+  api: { toggleModal: (show: boolean) => void };
   Modal: FC;
   isOpened: boolean;
-}
+};
 
 const defaultModalManagerFactory: ModalManagerFactory = () => ({
   Modal: () => null,
-  api: { 
-    toggleModal: () => {},
+  api: {
+    toggleModal: () => {}
   },
-  isOpened: false,
+  isOpened: false
 });
 
-export const ModalManagerContext = createContext<ModalManagerFactory>(defaultModalManagerFactory);
+export const ModalManagerContext = createContext<ModalManagerFactory>(
+  defaultModalManagerFactory
+);

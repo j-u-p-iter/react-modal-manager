@@ -18,7 +18,7 @@
     "test": "jupiter-scripts test",
     "start-example": "parcel ./example/index.html",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run && nyc report --reporter=text-summary",
+    "cypress:run": "cypress run",
     "ci": "concurrently --success first -k 'yarn run start-example' 'yarn run cypress:run'"
   },
   "devDependencies": {

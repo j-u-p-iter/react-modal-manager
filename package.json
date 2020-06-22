@@ -1,6 +1,6 @@
 {
   "name": "@j.u.p.iter/react-modal-manager",
-  "version": "0.0.1",
+  "version": "0.0.0-semantically-released",
   "description": "React Modal Manager",
   "main": "dist/lib/react-modal-manager.cjs.js",
   "module": "dist/lib/react-modal-manager.esm.js",

@@ -16,7 +16,7 @@
     "lint": "jupiter-scripts lint --format codeFrame",
     "lint:fix": "yarn run lint --fix",
     "test": "jupiter-scripts test",
-    "start-example": "parcel ./example/index.html",
+    "start-example": "parcel ./example/index.html & wait-on http://localhost:1234",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "ci": "concurrently --success first -k 'yarn run start-example' 'yarn run cypress:run'"
@@ -37,7 +37,8 @@
     "nyc": "^15.1.0",
     "parcel-bundler": "^1.12.4",
     "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+    "react-dom": "^16.8.2",
+    "wait-on": "^5.0.1"
   },
   "peerDependencies": {
     "react": ">=16.8.0"

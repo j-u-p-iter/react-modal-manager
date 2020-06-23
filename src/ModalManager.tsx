@@ -1,3 +1,4 @@
+import { identity, memoizeWith } from "ramda";
 import * as React from "react";
 
 import { ModalManagerContext } from "./ModalManagerContext";
@@ -30,11 +31,12 @@ export const ModalManager: React.FC<ModalManagerProps> = ({
     });
   };
 
-  const createModalWrapper = name => props => {
+  const createModalWrapper = memoizeWith(identity, name => props => {
     useEffect(() => {
       if (modalsState[name]) {
         return;
       }
+
       setModalsState({
         ...modalsState,
 
@@ -53,16 +55,16 @@ export const ModalManager: React.FC<ModalManagerProps> = ({
     );
 
     return <OriginalModal {...resultProps} />;
-  };
+  });
+
+  const contextValue = name => ({
+    Modal: createModalWrapper(name),
+    api: { toggleModal: createModalToggler(name) },
+    isOpened: modalsState[name] ? modalsState[name].isOpened : false
+  });
 
   return (
-    <ModalManagerContext.Provider
-      value={name => ({
-        Modal: createModalWrapper(name),
-        api: { toggleModal: createModalToggler(name) },
-        isOpened: modalsState[name] ? modalsState[name].isOpened : false
-      })}
-    >
+    <ModalManagerContext.Provider value={contextValue}>
       {children}
     </ModalManagerContext.Provider>
   );
